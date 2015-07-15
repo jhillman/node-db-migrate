@@ -1,35 +1,35 @@
-[![Build Status](https://travis-ci.org/db-migrate/node-db-migrate.svg?branch=master)](https://travis-ci.org/db-migrate/node-db-migrate)
-[![Dependency Status](https://david-dm.org/db-migrate/node-db-migrate.svg)](https://david-dm.org/db-migrate/node-db-migrate)
-[![devDependency Status](https://david-dm.org/db-migrate/node-db-migrate/dev-status.svg)](https://david-dm.org/db-migrate/node-db-migrate#info=devDependencies)
-[![Documentation Status](https://readthedocs.org/projects/db-migrate/badge/?version=latest)](https://readthedocs.org/projects/db-migrate/?badge=latest)
+[![Build Status](https://travis-ci.org/pg-db-migrate/node-pg-db-migrate.svg?branch=master)](https://travis-ci.org/pg-db-migrate/node-pg-db-migrate)
+[![Dependency Status](https://david-dm.org/pg-db-migrate/node-pg-db-migrate.svg)](https://david-dm.org/pg-db-migrate/node-pg-db-migrate)
+[![devDependency Status](https://david-dm.org/pg-db-migrate/node-pg-db-migrate/dev-status.svg)](https://david-dm.org/pg-db-migrate/node-pg-db-migrate#info=devDependencies)
+[![Documentation Status](https://readthedocs.org/projects/pg-db-migrate/badge/?version=latest)](https://readthedocs.org/projects/pg-db-migrate/?badge=latest)
 
-# db-migrate
-
-[![Join the chat at https://gitter.im/db-migrate/node-db-migrate](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/db-migrate/node-db-migrate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![NPM](https://nodei.co/npm/db-migrate.png?downloads=true&downloadRank=true)](https://nodei.co/npm/db-migrate/)
+# pg-db-migrate
 
 Database migration framework for node.js which includes postgresql data-types
 
-This is a forked package from https://github.com/db-migrate/node-db-migrate
+This is a forked package from https://github.com/pg-db-migrate/node-pg-db-migrate
+
+## major differences from original  
+
+using a datatype of `datetime` will now create a colum with type `timestamp with timezone`
 
 ## Installation
 
-    $ npm install -g pg-db-migrate
+    $ npm install -g pg-pg-db-migrate
 
 DB-Migrate is now available to you via:
 
-    $ db-migrate
+    $ pg-pg-db-migrate
 
 ### As local module
 
-Want to use db-migrate as local module?
+Want to use pg-db-migrate as local module?
 
-    $ npm install db-migrate
+    $ npm install pg-db-migrate
 
 DB-Migrate is now available to you via:
 
-    $ node node_modules/db-migrate/bin/db-migrate
+    $ node node_modules/pg-db-migrate/bin/pg-db-migrate
 
 ## Supported Databases
 
@@ -41,7 +41,7 @@ DB-Migrate is now available to you via:
 ## Usage
 
 ```
-Usage: db-migrate [up|down|reset|create|db] [[dbname/]migrationName|all] [options]
+Usage: pg-db-migrate [up|down|reset|create|db] [[dbname/]migrationName|all] [options]
 
 Down migrations are run in reverse run order, so migrationName is ignored for down migrations.
 Use the --count option to control how many down migrations are run (default is 1).
@@ -62,7 +62,7 @@ Options:
 
 ## Creating Migrations
 
-To create a migration, execute `db-migrate create` with a title. `node-db-migrate` will create a node module within `./migrations/` which contains the following two exports:
+To create a migration, execute `pg-db-migrate create` with a title. `node-pg-db-migrate` will create a node module within `./migrations/` which contains the following two exports:
 
 ```javascript
 exports.up = function (db, callback) {
@@ -78,8 +78,8 @@ All you have to do is populate these, invoking `callback()` when complete, and y
 
 For example:
 
-    $ db-migrate create add-pets
-    $ db-migrate create add-owners
+    $ pg-db-migrate create add-pets
+    $ pg-db-migrate create add-owners
 
 The first call creates `./migrations/20111219120000-add-pets.js`, which we can populate:
 
@@ -169,7 +169,7 @@ If you prefer to use sql files for your up and down statements, you can use the 
 
 For example:
 
-    $ db-migrate create add-people --sql-file
+    $ pg-db-migrate create add-people --sql-file
 
 This call creates 3 files:
 
@@ -187,7 +187,7 @@ The sql files will have the following content:
 And the javascript file with the following code that load these sql files:
 
 ```javascript
-dbm = dbm || require('db-migrate');
+dbm = dbm || require('pg-db-migrate');
 var type = dbm.dataType;
 var fs = require('fs');
 var path = require('path');
@@ -217,7 +217,7 @@ exports.down = function(db, callback) {
 
 ** Making it as default **
 
-To not need to always specify the `sql-file` option in your `db-migrate create` commands, you can set a property in your `database.json` as follows:
+To not need to always specify the `sql-file` option in your `pg-db-migrate create` commands, you can set a property in your `database.json` as follows:
 
 ```
 {
@@ -248,39 +248,39 @@ If you use MySQL, to be able to use multiple statements in your sql file, you ha
 
 You can also place it as a query string parameter into DATABASE_URL variable, as https://github.com/pwnall/node-parse-database-url allows passing them into config:
 
-    $ DATABASE_URL="mysql://DB_USER:DB_PASS@localhost/database-name?multipleStatements=true" db-migrate up
+    $ DATABASE_URL="mysql://DB_USER:DB_PASS@localhost/database-name?multipleStatements=true" pg-db-migrate up
 
 ## Running Migrations
 
 When first running the migrations, all will be executed in sequence. A table named `migrations` will also be created in your database to track which migrations have been applied.
 
-      $ db-migrate up
+      $ pg-db-migrate up
       [INFO] Processed migration 20111219120000-add-pets
       [INFO] Processed migration 20111219120005-add-owners
       [INFO] Done
 
 Subsequent attempts to run these migrations will result in the following output
 
-      $ db-migrate up
+      $ pg-db-migrate up
       [INFO] No migrations to run
       [INFO] Done
 
-If we were to create another migration using `db-migrate create`, and then execute migrations again, we would execute only those not previously executed:
+If we were to create another migration using `pg-db-migrate create`, and then execute migrations again, we would execute only those not previously executed:
 
-      $ db-migrate up
+      $ pg-db-migrate up
       [INFO] Processed migration 20111220120210-add-kennels
       [INFO] Done
 
 You can also run migrations incrementally by specifying a date substring. The example below will run all migrations created on or before December 19, 2011:
 
-      $ db-migrate up 20111219
+      $ pg-db-migrate up 20111219
       [INFO] Processed migration 20111219120000-add-pets
       [INFO] Processed migration 20111219120005-add-owners
       [INFO] Done
 
 You can also run a specific number of migrations with the -c option:
 
-      $ db-migrate up -c 1
+      $ pg-db-migrate up -c 1
       [INFO] Processed migration 20111219120000-add-pets
       [INFO] Done
 
@@ -288,7 +288,7 @@ All of the down migrations work identically to the up migrations by substituting
 
 ## Configuration
 
-db-migrate supports the concept of environments. For example, you might have a dev, test, and prod environment where you need to run the migrations at different times. Environment settings are loaded from a database.json file like the one shown below:
+pg-db-migrate supports the concept of environments. For example, you might have a dev, test, and prod environment where you need to run the migrations at different times. Environment settings are loaded from a database.json file like the one shown below:
 
 ```javascript
 {
@@ -337,7 +337,7 @@ You can also specify environment variables in your config file by using a specia
   },
 }
 ```
-In this case, db-migrate will search your environment for variables
+In this case, pg-db-migrate will search your environment for variables
 called `PRODUCTION_USERNAME` and `PRODUCTION_PASSWORD`, and use those values for the corresponding configuration entry.
 
 Note that if the settings for an environment are represented by a single string that string will be parsed as a database URL.  You can also provide a database URL through environmental variable like this:
@@ -347,9 +347,9 @@ Note that if the settings for an environment are represented by a single string 
 }
 ```
 
-You can pass the -e or --env option to db-migrate to select the environment you want to run migrations against. The --config option can be used to specify the path to your database.json file if it's not in the current working directory.
+You can pass the -e or --env option to pg-db-migrate to select the environment you want to run migrations against. The --config option can be used to specify the path to your database.json file if it's not in the current working directory.
 
-    db-migrate up --config config/database.json -e prod
+    pg-db-migrate up --config config/database.json -e prod
 
 The above will run all migrations that haven't yet been run in the prod environment, grabbing the settings from config/database.json.
 
@@ -361,13 +361,13 @@ file settings. This is helpful for use with Heroku.
 
 You can have multiple migration scopes, which are subfolders within your migrations folder. A scope gets called like the following:
 
-    $ db-migrate up:myScope
+    $ pg-db-migrate up:myScope
 
 #### Executing all scopes together
 
 If you want to execute all scopes with one command, you can execute the following:
 
-    $ db-migrate up:all
+    $ pg-db-migrate up:all
 
 Obviously this means you **CAN'T** create scope which is named all.
 
@@ -375,7 +375,7 @@ Obviously this means you **CAN'T** create scope which is named all.
 
 You can also configure the scope to specify a sub configuration. Currently you can only define database and schema within this config.
 
-This config file is used to tell db-migrate to switch to the `database` or
+This config file is used to tell pg-db-migrate to switch to the `database` or
 `schema`. Databases is used for most databases, except **postgres**
 which needs the schema variable.
 
@@ -403,7 +403,7 @@ If you need to connect to the database through an SSH tunnel, you can set the `t
 }
 ```
 
-One common use case for this is when the remote DB does not accept connections from the host that will be running db-migrate. For example, a database within an AWS
+One common use case for this is when the remote DB does not accept connections from the host that will be running pg-db-migrate. For example, a database within an AWS
 [Virtual Private Cloud (VPC)](http://aws.amazon.com/vpc) that is only open to [EC2](http://aws.amazon.com/ec2) hosts within the same VPC. By pointing the tunnel sshConfig to a host within the DB's
 VPC, you can run your migrations from any host.
 
@@ -420,11 +420,11 @@ requires a private key file, you can specify its path using this property.
 There is currently a small list of generic Datatypes you can use, to make your
 migrations more database independent.
 
-Find the list of supported types [here](https://github.com/kunklejr/node-db-migrate/blob/master/lib/data_type.js).
+Find the list of supported types [here](https://github.com/kunklejr/node-pg-db-migrate/blob/master/lib/data_type.js).
 
 ## Migrations API - SQL
 
-Below are examples of all the different migrations supported by db-migrate. Please note that not all migrations are supported by all databases. For example, SQLite does not support dropping columns.
+Below are examples of all the different migrations supported by pg-db-migrate. Please note that not all migrations are supported by all databases. For example, SQLite does not support dropping columns.
 
 ### createTable(tableName, columnSpec, callback)
 
@@ -727,7 +727,7 @@ __Arguments__
 
 ## Migrations API - NoSQL
 
-Below are examples of all the different migrations supported by db-migrate for NoSQL databases.
+Below are examples of all the different migrations supported by pg-db-migrate for NoSQL databases.
 
 ### createCollection(collectionName, callback)
 
