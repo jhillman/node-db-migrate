@@ -10,11 +10,11 @@ using a datatype of `datetime` will now create a colum with type `timestamp with
 
 ## Installation
 
-    $ npm install -g pg-pg-db-migrate
+    $ npm install -g pg-db-migrate
 
 DB-Migrate is now available to you via:
 
-    $ pg-pg-db-migrate
+    $ pg-db-migrate
 
 ### As local module
 
