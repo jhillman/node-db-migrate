@@ -2,11 +2,11 @@
 
 Database migration framework for node.js which includes postgresql data-types
 
-This is a forked package from https://github.com/pg-db-migrate/node-pg-db-migrate
+This is a forked package from https://github.com/db-migrate/node-db-migrate
 
 ## major differences from original  
 
-using a datatype of `datetime` will now create a colum with type `timestamp with timezone`
+using a datatype of `datetime` will now create a column with type `timestamp with timezone`
 
 ## Installation
 
