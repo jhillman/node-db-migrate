@@ -1,8 +1,3 @@
-[![Build Status](https://travis-ci.org/pg-db-migrate/node-pg-db-migrate.svg?branch=master)](https://travis-ci.org/pg-db-migrate/node-pg-db-migrate)
-[![Dependency Status](https://david-dm.org/pg-db-migrate/node-pg-db-migrate.svg)](https://david-dm.org/pg-db-migrate/node-pg-db-migrate)
-[![devDependency Status](https://david-dm.org/pg-db-migrate/node-pg-db-migrate/dev-status.svg)](https://david-dm.org/pg-db-migrate/node-pg-db-migrate#info=devDependencies)
-[![Documentation Status](https://readthedocs.org/projects/pg-db-migrate/badge/?version=latest)](https://readthedocs.org/projects/pg-db-migrate/?badge=latest)
-
 # pg-db-migrate
 
 Database migration framework for node.js which includes postgresql data-types
