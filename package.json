@@ -1,7 +1,6 @@
 {
   "name": "pg-db-migrate",
-  "description": "Database migration framework for node.js with postgres \
-                  specific data-types",
+  "description": "Database migration framework for node.js with postgres specific data-types",
   "author": "Jeff Kunkle",
   "bin": "./bin/db-migrate",
   "keywords": [
@@ -9,10 +8,11 @@
     "db",
     "migrate",
     "migration",
-    "sqlite",
-    "mysql"
+    "pg",
+    "postgres",
+    "postgresql"
   ],
-  "version": "0.1.0",
+  "version": "0.0.1",
   "engines": {
     "node": ">=0.6.0"
   },

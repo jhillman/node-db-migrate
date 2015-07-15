@@ -9,11 +9,13 @@
 
 [![NPM](https://nodei.co/npm/db-migrate.png?downloads=true&downloadRank=true)](https://nodei.co/npm/db-migrate/)
 
-Database migration framework for node.js
+Database migration framework for node.js which includes postgresql data-types
+
+This is a forked package from https://github.com/db-migrate/node-db-migrate
 
 ## Installation
 
-    $ npm install -g db-migrate
+    $ npm install -g pg-db-migrate
 
 DB-Migrate is now available to you via:
 
