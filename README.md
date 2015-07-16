@@ -7,6 +7,10 @@ This is a forked package from https://github.com/db-migrate/node-db-migrate
 ## major differences from original  
 
 using a datatype of `datetime` will now create a column with type `timestamp with timezone`
+you can now use a text multi-dimensional array with the data type `text[][]`
+you can now use an integer multi-dimensional array with the data type `integer[][]`
+you can now use a json with data type `json`
+you can now use a jsonb with data type `jsonb`
 
 ## Installation
 
